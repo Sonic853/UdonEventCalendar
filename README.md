@@ -1,5 +1,8 @@
 # Udon Event Calendar
 Udon 活动日历
+
+活动日历默认源： https://github.com/UdonEvent/udonevent.github.io
+
 ## License restrictions 许可限制
 Individuals or companies in Chinese Mainland (except Hong Kong China, Macau China, and Taiwan Province of China) are prohibited from using this LGPL license and using this repository and products if the following circumstances apply:
 
