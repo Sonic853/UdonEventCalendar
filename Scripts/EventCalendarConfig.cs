@@ -25,7 +25,7 @@ namespace Sonic853.Udon.EventCalendar
             {
                 if (!string.IsNullOrWhiteSpace(eventCalendarImageUrl.ToString()))
                     urlSubmitterImage.url = eventCalendarImageUrl;
-                urlSubmitterImage.SubmitUrl();
+                urlSubmitterImage.SubmitUrlWithUpdate();
             }
         }
     }
