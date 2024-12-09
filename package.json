@@ -1,0 +1,24 @@
+{
+  "name": "com.sonic853.udon.event-calendar",
+  "version": "1.0.0",
+  "displayName": "Sonic853 - Udon Event Calendar",
+  "description": "Udon 活动日历",
+  "unity": "2022.3",
+  "homepage": "https://github.com/Sonic853/UdonEventCalendar",
+  "documentationUrl": "https://github.com/Sonic853/UdonEventCalendar",
+  "changelogUrl": "https://github.com/Sonic853/UdonEventCalendar/releases",
+  "licensesUrl": "https://github.com/Sonic853/UdonEventCalendar/blob/master/LICENSE",
+  "license": "LGPL-3.0-or-later",
+  "keywords": [],
+  "author": {
+    "name": "Sonic853",
+    "email": "sonic853@qq.com",
+    "url": "https://github.com/Sonic853"
+  },
+  "vpmDependencies": {
+    "com.sonic853.udon.translate-manager": "1.x.x",
+    "com.sonic853.udonlab.posterui": "1.x.x",
+    "com.sonic853.udonlab.arrayplus": "2.x.x",
+    "com.sonic853.udonlab.urlloader": "2.x.x"
+  }
+}

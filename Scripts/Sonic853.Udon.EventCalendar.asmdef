@@ -1,0 +1,21 @@
+{
+    "name": "Sonic853.Udon.EventCalendar",
+    "rootNamespace": "",
+    "references": [
+        "Unity.TextMeshPro",
+        "VRC.Udon",
+        "UdonSharp.Runtime",
+        "Sonic853.UdonLab.ArrayPlus",
+        "Sonic853.Udon.TranslateManager",
+        "Sonic853.UdonLab.UrlLoader"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
