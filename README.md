@@ -3,6 +3,8 @@ Udon 活动日历
 
 活动日历默认源： https://github.com/UdonEvent/udonevent.github.io
 
+想要提交您的活动？[点击这里前往提交！](https://github.com/UdonEvent/udonevent.github.io/issues/new/choose)
+
 ## License restrictions 许可限制
 Individuals or companies in Chinese Mainland (except Hong Kong China, Macau China, and Taiwan Province of China) are prohibited from using this LGPL license and using this repository and products if the following circumstances apply:
 
