@@ -332,7 +332,6 @@ namespace Sonic853.Udon.EventCalendar
         public string _(string text) => Translate.GetText(text);
         public string _i18n(string text)
         {
-            if (!i18n.ContainsKey(text)) { return text; }
             if (!i18n.TryGetValue(text, out var i18nvalue)) { return text; }
             if (i18nvalue.TokenType != TokenType.DataDictionary) { return text; }
             var dataDictionary = i18nvalue.DataDictionary;
