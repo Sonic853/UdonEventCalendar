@@ -103,7 +103,8 @@ namespace Sonic853.Udon.EventCalendar
                     eventTogglePlatform.eventCalendar = this;
                     eventTogglePlatform.ToggleName = itemString;
                     eventTogglePlatform.gameObject.SetActive(true);
-                    eventTogglePlatforms.SetValue(eventTogglePlatform, i);
+                    // eventTogglePlatforms.SetValue(eventTogglePlatform, i);
+                    eventTogglePlatforms[i] = eventTogglePlatform;
                     // platforms.SetValue(itemString, i);
                 }
             }
@@ -129,7 +130,8 @@ namespace Sonic853.Udon.EventCalendar
                     eventToggleTag.eventCalendar = this;
                     eventToggleTag.ToggleName = itemString;
                     eventToggleTag.gameObject.SetActive(true);
-                    eventToggleTags.SetValue(eventToggleTag, i);
+                    // eventToggleTags.SetValue(eventToggleTag, i);
+                    eventToggleTags[i] = eventToggleTag;
                     // tags.SetValue(itemString, i);
                 }
             }

@@ -259,7 +259,8 @@ namespace Sonic853.Udon.EventCalendar
                     var tPlatform = new string[platformLength];
                     for (int i = 0; i < platformLength; i++)
                     {
-                        tPlatform.SetValue(_(platform[i]), i);
+                        // tPlatform.SetValue(_(platform[i]), i);
+                        tPlatform[i] = _(platform[i]);
                     }
                     platformUI.text = string.Join(_(", "), tPlatform);
                 }
@@ -286,7 +287,8 @@ namespace Sonic853.Udon.EventCalendar
                     for (int i = 0; i < tagsLength; i++)
                     {
                         var tTag = _i18n(tags[i]);
-                        tTags.SetValue(tTag, i);
+                        // tTags.SetValue(tTag, i);
+                        tTags[i] = tTag;
                     }
                     tagsUI.text = string.Join(_(", "), tTags);
                 }
