@@ -4472,8 +4472,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2849279990949138151}
   - {fileID: 2410483063786428140}
+  - {fileID: 2849279990949138151}
   m_Father: {fileID: 3021265489306998341}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5052216400965246740
@@ -4500,8 +4500,8 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 9116869074170122842}
   currentLanguage: en
   translates:
-  - {fileID: 1677588982151166039}
   - {fileID: 7028748002362805687}
+  - {fileID: 1677588982151166039}
   texts: []
   tMP_Texts:
   - {fileID: 4605832593519653122}
@@ -13488,7 +13488,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1814714749470801380}
   m_HandleRect: {fileID: 3604019725512453415}
   m_Direction: 2
-  m_Value: 0.9999982
+  m_Value: 0.9999965
   m_Size: 0.9640957
   m_NumberOfSteps: 0
   m_OnValueChanged:
