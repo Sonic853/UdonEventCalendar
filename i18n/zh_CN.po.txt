@@ -183,3 +183,6 @@ msgstr "关于"
 
 msgid "Submit Event? Click Blue Button!"
 msgstr "想要提交活动？点击蓝色按钮！"
+
+msgid "Show link"
+msgstr "显示链接"

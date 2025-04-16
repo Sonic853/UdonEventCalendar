@@ -183,3 +183,6 @@ msgstr "About"
 
 msgid "Submit Event? Click Blue Button!"
 msgstr "Submit Event? Click Blue Button!"
+
+msgid "Show link"
+msgstr "Show link"

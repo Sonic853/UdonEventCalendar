@@ -195,20 +195,30 @@ namespace Sonic853.Udon.EventCalendar
                 groupID = value;
                 if (!string.IsNullOrEmpty(groupID))
                 {
-                    if (!groupID.StartsWith("grp_"))
-                    {
-                        groupBtn.gameObject.SetActive(false);
-                        var ecgroup = _("EC Group:{0} ({1})");
-                        if (ecgroup.StartsWith("EC Group:")) ecgroup = ecgroup.Substring(9);
-                        groupUI.text = string.Format(ecgroup, groupName, groupID);
-                        groupInput.gameObject.SetActive(true);
-                        groupInput.text = $"https://vrc.group/{groupID}";
-                    }
-                    else
+                    if (groupID.StartsWith("grp_"))
                     {
                         groupBtn.gameObject.SetActive(useGroupBtn);
                         groupInput.gameObject.SetActive(!useGroupBtn);
                         groupInput.text = $"https://vrchat.com/home/group/{groupID}";
+                    }
+                    else
+                    {
+                        groupBtn.gameObject.SetActive(false);
+                        var ecgroup = _("EC Group:{0} ({1})");
+                        if (ecgroup.StartsWith("EC Group:")) ecgroup = ecgroup.Substring(9);
+                        var showGroupID = groupID;
+                        if (showGroupID.Length > 12) showGroupID = _("Show link");
+                        groupUI.text = string.Format(ecgroup, groupName, showGroupID);
+                        groupInput.gameObject.SetActive(true);
+                        var lowerg = groupID.ToLower();
+                        if (lowerg.StartsWith("http:") || lowerg.StartsWith("https:"))
+                        {
+                            groupInput.text = groupID;
+                        }
+                        else
+                        {
+                            groupInput.text = $"https://vrc.group/{groupID}";
+                        }
                     }
                 }
                 groupObject.SetActive(!string.IsNullOrEmpty(groupUI.text));
