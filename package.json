@@ -1,8 +1,8 @@
 {
   "name": "com.sonic853.udon.event-calendar",
-  "version": "1.0.2",
-  "displayName": "Sonic853 - Udon Event Calendar",
-  "description": "Udon 活动日历",
+  "version": "1.1.0",
+  "displayName": "Sonic853 - Udon Multiple Event Calendar",
+  "description": "Udon 活动日历集合",
   "unity": "2022.3",
   "homepage": "https://github.com/Sonic853/UdonEventCalendar",
   "documentationUrl": "https://github.com/Sonic853/UdonEventCalendar",
@@ -17,7 +17,7 @@
   },
   "vpmDependencies": {
     "com.sonic853.udon.translate-manager": "1.x.x",
-    "com.sonic853.udonlab.posterui": "1.x.x",
+    "com.sonic853.udonlab.posterui": "2.x.x",
     "com.sonic853.udonlab.arrayplus": "2.x.x",
     "com.sonic853.udonlab.urlloader": "2.x.x"
   }

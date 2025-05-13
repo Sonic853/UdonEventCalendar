@@ -34,13 +34,16 @@ namespace Sonic853.Udon.EventCalendar
             }
         }
         string description;
+        string descriptionEllipsis;
         public string Description
         {
             get => description;
             set
             {
                 description = value;
-                descriptionUI.text = _E("description", description);
+                // 截取第一行文字并添加省略号，最后放入 descriptionEllipsis 里
+                descriptionEllipsis = _E("description", description).Split('\n')[0] + "...";
+                descriptionUI.text = descriptionEllipsis;
             }
         }
         public string Author

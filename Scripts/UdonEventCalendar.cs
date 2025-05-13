@@ -1,12 +1,13 @@
 ﻿
 using System;
-using System.Linq;
 using Sonic853.Translate;
 using Sonic853.Udon.ArrayPlus;
+using Sonic853.Udon.UrlLoader;
 using TMPro;
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
+using VRC.SDK3.Components;
 using VRC.SDK3.Data;
 using VRC.SDKBase;
 using VRC.Udon;
@@ -16,6 +17,12 @@ namespace Sonic853.Udon.EventCalendar
     public class UdonEventCalendar : UdonSharpBehaviour
     {
         public TranslateManager translateManager;
+        public GameObject EventSourcesObj;
+        public EventSource[] eventSources;
+        DataDictionary eventIndex = new DataDictionary();
+        public TMP_Dropdown eventDropdown;
+        string[] tmpEventOptions = new string[0];
+        public UrlSubmitter urlSubmitterData;
         /// <summary>
         /// 使用原始语言
         /// </summary>
@@ -45,10 +52,13 @@ namespace Sonic853.Udon.EventCalendar
         [SerializeField] ToggleGroup eventListToggleGroup;
         [SerializeField] EventContent eventContent;
         [SerializeField] GameObject eventInfo;
+        [SerializeField] InputField eventInfoInput;
         [SerializeField] GameObject eventLoading;
         [SerializeField] TextAsset testText;
         public int imageCount = 0;
+        [NonSerialized]
         public DataList events = new DataList();
+        [NonSerialized]
         public DataDictionary i18n = new DataDictionary();
         DataToken data;
         public string content;
@@ -56,6 +66,61 @@ namespace Sonic853.Udon.EventCalendar
         {
             if (!translateManager.LoadedTranslate) translateManager.LoadTranslate();
             if (testText != null) LoadEvents(testText.text);
+            if (EventSourcesObj != null)
+            {
+                eventSources = (EventSource[])EventSourcesObj.GetComponentsInChildren(typeof(UdonBehaviour));
+            }
+            eventIndex.Clear();
+            for (int i = 0; i < eventSources.Length; i++)
+            {
+                var item = eventSources[i];
+                if (item == null) { continue; }
+                if (eventIndex.TryGetValue(item.eventName, out var value)) { continue; }
+                eventIndex.Add(_(item.eventName), i);
+            }
+            var keys = eventIndex.GetKeys();
+            tmpEventOptions = new string[keys.Count];
+            for (int i = 0; i < keys.Count; i++)
+            {
+                var key = keys[i].String;
+                if (eventIndex.TryGetValue(key, out var item))
+                    tmpEventOptions[i] = key;
+            }
+            if (eventDropdown != null)
+            {
+                eventDropdown.ClearOptions();
+                eventDropdown.AddOptions(tmpEventOptions);
+            }
+        }
+        public void OnDropdownSelect()
+        {
+            Debug.Log($"OnDropdownSelect eventDropdown.value: {eventDropdown.value} tmpEventOptions[eventDropdown.value]: {tmpEventOptions[eventDropdown.value]}");
+            if (!eventIndex.TryGetValue(tmpEventOptions[eventDropdown.value], out var item)) { return; }
+            var source = eventSources[item.Int];
+            Debug.Log($"item.Int: {item.Int} source: {source}");
+            if (source == null) { return; }
+            var url = source.url;
+            var altUrl = source.altUrl;
+            if (translateManager.currentLanguage == "zh-CN" && !string.IsNullOrWhiteSpace(altUrl.ToString()))
+            {
+                url = source.altUrl;
+                altUrl = source.url;
+            }
+            RequireLoadEvents(url, altUrl);
+        }
+        public void RequireLoadEvents(VRCUrl url, VRCUrl altUrl = null)
+        {
+            if (urlSubmitterData != null)
+            {
+                ShowLoading();
+                ClearEventList();
+                urlSubmitterData.altUrl = VRCUrl.Empty;
+                if (!string.IsNullOrWhiteSpace(url.ToString()))
+                    urlSubmitterData.url = url;
+                if (!string.IsNullOrWhiteSpace(altUrl.ToString()) && altUrl != url)
+                    urlSubmitterData.altUrl = altUrl;
+                urlSubmitterData.SubmitUrl();
+            }
         }
         public void LoadEvents() => LoadEvents(content);
         public void LoadEvents(string _content)
@@ -112,6 +177,11 @@ namespace Sonic853.Udon.EventCalendar
             && i18nValue.TokenType == TokenType.DataDictionary)
             {
                 i18n = i18nValue.DataDictionary;
+            }
+            if (dataDictionary.TryGetValue("submitUrl", out var submitUrlValue)
+            && submitUrlValue.TokenType == TokenType.String)
+            {
+                eventInfoInput.text = submitUrlValue.String;
             }
             if (dataDictionary.TryGetValue("tags", out var tagsValue)
             && tagsValue.TokenType == TokenType.DataDictionary)

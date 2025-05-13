@@ -11,20 +11,41 @@ namespace Sonic853.Udon.EventCalendar
     {
         [SerializeField] VRCUrl eventCalendarDataUrl;
         [SerializeField] VRCUrl eventCalendarImageUrl;
+        [SerializeField] VRCUrl eventCalendarDataAltUrl;
+        [SerializeField] VRCUrl eventCalendarImageAltUrl;
         [SerializeField] UrlSubmitter urlSubmitterData;
         [SerializeField] UrlSubmitter urlSubmitterImage;
         void Start()
         {
+            var currentLanguage = VRCPlayerApi.GetCurrentLanguage() ?? "en";
             if (urlSubmitterData != null)
             {
-                if (!string.IsNullOrWhiteSpace(eventCalendarDataUrl.ToString()))
-                    urlSubmitterData.url = eventCalendarDataUrl;
+                var url = eventCalendarDataUrl;
+                var altUrl = eventCalendarDataAltUrl;
+                if (currentLanguage == "zh-CN" && !string.IsNullOrWhiteSpace(altUrl.ToString()))
+                {
+                    url = eventCalendarDataAltUrl;
+                    altUrl = eventCalendarDataUrl;
+                }
+                if (!string.IsNullOrWhiteSpace(url.ToString()))
+                    urlSubmitterData.url = url;
+                if (!string.IsNullOrWhiteSpace(altUrl.ToString()) && altUrl != url)
+                    urlSubmitterData.altUrl = altUrl;
                 urlSubmitterData.SubmitUrl();
             }
             if (urlSubmitterImage != null)
             {
-                if (!string.IsNullOrWhiteSpace(eventCalendarImageUrl.ToString()))
-                    urlSubmitterImage.url = eventCalendarImageUrl;
+                var url = eventCalendarImageUrl;
+                var altUrl = eventCalendarImageAltUrl;
+                if (currentLanguage == "zh-CN" && !string.IsNullOrWhiteSpace(altUrl.ToString()))
+                {
+                    url = eventCalendarImageAltUrl;
+                    altUrl = eventCalendarImageUrl;
+                }
+                if (!string.IsNullOrWhiteSpace(url.ToString()))
+                    urlSubmitterImage.url = url;
+                if (!string.IsNullOrWhiteSpace(altUrl.ToString()) && altUrl != url)
+                    urlSubmitterImage.altUrl = altUrl;
                 urlSubmitterImage.SubmitUrlWithUpdate();
             }
         }
